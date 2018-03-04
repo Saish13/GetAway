@@ -67,3 +67,5 @@ c:\users\ws-1\documents\visual studio 2015\Projects\GetAway\GetAway\bin\Microsof
 c:\users\ws-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.csprojResolveAssemblyReference.cache
 c:\users\ws-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.dll
 c:\users\ws-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.pdb
+C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.InitialModel.resources
+C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.csproj.GenerateResource.Cache
