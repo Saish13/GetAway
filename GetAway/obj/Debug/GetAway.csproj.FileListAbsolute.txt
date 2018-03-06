@@ -74,3 +74,4 @@ C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\Ge
 C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.UpdateAspNetUserAndCreateFeedback.resources
 C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.AddedRoomTable.resources
 C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.AddedFeedbackTable.resources
+C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.AddedAdminTable.resources

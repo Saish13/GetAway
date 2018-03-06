@@ -38,6 +38,7 @@ namespace GetAway.Models
         public DbSet<Hotel> Hotel { get; set; }
         public DbSet<Room> Room { get; set; }
         public DbSet<Feedback> Feedback { get; set; }
+        public DbSet<Administrator> Administrator { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
