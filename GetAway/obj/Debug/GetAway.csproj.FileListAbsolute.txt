@@ -69,3 +69,8 @@ c:\users\ws-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\Ge
 c:\users\ws-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.pdb
 C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.InitialModel.resources
 C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.csproj.GenerateResource.Cache
+C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.AddedPackagesTable.resources
+C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.AddedHotelTable.resources
+C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.UpdateAspNetUserAndCreateFeedback.resources
+C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.AddedRoomTable.resources
+C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.AddedFeedbackTable.resources
