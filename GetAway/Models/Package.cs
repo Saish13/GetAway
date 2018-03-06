@@ -6,7 +6,7 @@ using System.Web;
 
 namespace GetAway.Models
 {
-    public class Packages
+    public class Package
     {
         [Required]
         public int Id { get; set; }
@@ -36,7 +36,7 @@ namespace GetAway.Models
         [Display(Name = "Package Picture 5")]
         public string PackagePicture5 { get; set; }
 
-        
+
         [StringLength(255)]
         [Display(Name = "Package Picture 6")]
         public string PackagePicture6 { get; set; }

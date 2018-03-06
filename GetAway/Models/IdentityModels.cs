@@ -34,7 +34,7 @@ namespace GetAway.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<Packages> Packages { get; set; }
+        public DbSet<Package> Package { get; set; }
         public DbSet<Hotel> Hotel { get; set; }
         public DbSet<Room> Room { get; set; }
         public DbSet<Feedback> Feedback { get; set; }
