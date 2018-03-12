@@ -79,6 +79,21 @@ namespace GetAway.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Username")]
+        [StringLength(50)]
+        public string UserName { get; set; }
+
+        [Required]
+        [Display(Name = "Address")]
+        [StringLength(255)]
+        public string Address { get; set; }
+
+        [Required]
+        [Display(Name = "Contact Number")]
+        public string PhoneNumber { get; set; }
+
     }
 
     public class ResetPasswordViewModel

@@ -1,0 +1,86 @@
+﻿@model GetAway.ViewModels.AddRoomViewModel
+@{
+    ViewBag.Title = "AddRoom";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+
+<h2>AddRoom</h2>
+
+
+@using (Html.BeginForm("AddRoom", "Administrators", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    <br>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Room.RoomNumber, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Room.RoomNumber, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Room.HotelID, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.Room.HotelID, new SelectList(Model.Hotel,"Id","HotelName"), "Select Hotel", new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Room.RoomType, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Room.RoomType, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Room.RoomRate, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Room.RoomRate, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Room.RoomDescription, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.Room.RoomDescription, new { @class = "form-control" })
+        </div>
+    </div>
+
+
+    @*
+         Vertical Line
+        <div style="border-left:1px solid #000;height:500px"></div>
+    *@
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Room.RoomPicture1, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @*@Html.TextBoxFor(m => m.Room.RoomPicture1, new { @type = "file", name = "Room_RoomPicture1" })*@
+            <input type="file" name="rp1" id="rp1">
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Room.RoomPicture2, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @*@Html.TextBoxFor(m => m.Room.RoomPicture2, new { @type = "file" })*@
+            <input type="file" name="rp2" id="rp2">
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Room.RoomPicture3, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @*@Html.TextBoxFor(m => m.Room.RoomPicture3, new { @type = "file" })*@
+            <input type="file" name="rp3" id="rp3">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Add Room" />
+        </div>
+    </div>
+}
+

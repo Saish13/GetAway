@@ -1,0 +1,110 @@
+﻿@model GetAway.Models.Hotel
+@{
+    ViewBag.Title = "AddHotel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+
+<h2>Add Hotel</h2>
+
+@using (Html.BeginForm("AddHotel", "Administrators", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+{
+    <br>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.HotelName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.HotelName, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.HotelRooms, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.HotelRooms, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.HotelContactNumber, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.HotelContactNumber, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.HotelAddress, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.HotelAddress, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.HotelDescription, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(m => m.HotelDescription, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.HotelRating, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.HotelRating, new { @class = "form-control" })
+        </div>
+    </div>
+
+
+    @*
+         Vertical Line
+        <div style="border-left:1px solid #000;height:500px"></div>
+    *@
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.HotelPicture1, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.HotelPicture1, new { @type = "file" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.HotelPicture2, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.HotelPicture2, new { @type = "file" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.HotelPicture3, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.HotelPicture3, new { @type = "file" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.HotelPicture4, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.HotelPicture4, new { @type = "file" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.HotelPicture5, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.HotelPicture5, new { @type = "file" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.HotelPicture6, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.HotelPicture6, new { @type = "file" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Add Hotel" />
+        </div>
+    </div>
+}
+

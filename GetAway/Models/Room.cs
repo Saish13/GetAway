@@ -12,6 +12,9 @@ namespace GetAway.Models
         [Required]
         public int Id { get; set; }
 
+        [Required]
+        public byte RoomNumber { get; set; }
+
         [StringLength(30)]
         public string RoomType { get; set; }
 
@@ -37,6 +40,11 @@ namespace GetAway.Models
         public Hotel Hotel { get; set; }
 
         [Required]
+        [Display(Name = "Hotel Name")]
         public int HotelID { get; set; }
+
+        [Required]
+        [Display(Name = "Rate")]
+        public int RoomRate { get; set; }
     }
 }

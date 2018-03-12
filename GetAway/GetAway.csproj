@@ -168,8 +168,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdministratorsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PackagesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -209,6 +211,14 @@
     <Compile Include="Migrations\201803061436388_AddedUpdatedPackageTable.Designer.cs">
       <DependentUpon>201803061436388_AddedUpdatedPackageTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803120814010_AddedRoomNumberToRoomTable.cs" />
+    <Compile Include="Migrations\201803120814010_AddedRoomNumberToRoomTable.Designer.cs">
+      <DependentUpon>201803120814010_AddedRoomNumberToRoomTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803121144021_AddedRoomRateToRoomTable.cs" />
+    <Compile Include="Migrations\201803121144021_AddedRoomRateToRoomTable.Designer.cs">
+      <DependentUpon>201803121144021_AddedRoomRateToRoomTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Administrator.cs" />
@@ -220,6 +230,7 @@
     <Compile Include="Models\Room.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AddRoomViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -276,9 +287,17 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Administrators\NewPackage.cshtml" />
+    <Content Include="Views\Administrators\NewHotel.cshtml" />
+    <Content Include="Views\Administrators\NewRoom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\Customers\" />
+    <Folder Include="Images\Hotels\" />
+    <Folder Include="Images\Packages\" />
+    <Folder Include="Images\Rooms\" />
+    <Folder Include="Views\Packages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -315,6 +334,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803061436388_AddedUpdatedPackageTable.resx">
       <DependentUpon>201803061436388_AddedUpdatedPackageTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803120814010_AddedRoomNumberToRoomTable.resx">
+      <DependentUpon>201803120814010_AddedRoomNumberToRoomTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803121144021_AddedRoomRateToRoomTable.resx">
+      <DependentUpon>201803121144021_AddedRoomRateToRoomTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
