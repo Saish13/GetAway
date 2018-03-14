@@ -79,3 +79,5 @@ C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\Ge
 C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.AddedUpdatedPackageTable.resources
 C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.AddedRoomNumberToRoomTable.resources
 C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.AddedRoomRateToRoomTable.resources
+C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\bin\AutoMapper.dll
+C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\bin\AutoMapper.xml
