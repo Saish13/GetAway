@@ -81,3 +81,10 @@ C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\Ge
 C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.AddedRoomRateToRoomTable.resources
 C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\bin\AutoMapper.dll
 C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\bin\AutoMapper.xml
+C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\bin\System.Net.Http.Formatting.dll
+C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\bin\System.Web.Http.dll
+C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\bin\System.Web.Http.WebHost.dll
+C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\bin\System.Net.Http.Formatting.xml
+C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\bin\System.Web.Http.xml
+C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\bin\System.Web.Http.WebHost.xml
+C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.AddedWalletToCustomer.resources
