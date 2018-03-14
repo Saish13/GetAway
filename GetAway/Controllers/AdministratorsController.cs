@@ -36,6 +36,7 @@ namespace GetAway.Controllers
             return View();
         }
 
+        
         // Needs validation for file type
         public ActionResult AddPackage(Package Package, HttpPostedFileBase PackagePicture1, HttpPostedFileBase PackagePicture2, HttpPostedFileBase PackagePicture3, HttpPostedFileBase PackagePicture4, HttpPostedFileBase PackagePicture5, HttpPostedFileBase PackagePicture6)
         {
