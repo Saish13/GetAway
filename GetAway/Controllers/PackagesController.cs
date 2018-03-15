@@ -13,5 +13,10 @@ namespace GetAway.Controllers
         {
             return View();
         }
+
+        public ActionResult ListPackages()
+        {
+            return View();
+        }
     }
 }

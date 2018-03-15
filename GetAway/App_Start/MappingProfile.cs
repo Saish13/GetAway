@@ -20,6 +20,9 @@ namespace GetAway.App_Start
 
             Mapper.CreateMap<Room, RoomDto>();
             Mapper.CreateMap<RoomDto, Room>();
+
+            Mapper.CreateMap<Feedback, FeedbackDto>();
+            Mapper.CreateMap<FeedbackDto, Feedback>();
         }
     }
 }

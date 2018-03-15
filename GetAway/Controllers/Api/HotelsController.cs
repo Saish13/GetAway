@@ -54,6 +54,7 @@ namespace GetAway.Controllers.Api
             return Ok();
         }
 
+
         // DELETE /api/hotels/1
         [HttpDelete]
         public IHttpActionResult DeleteHotel(int id)
