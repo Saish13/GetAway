@@ -58,12 +58,12 @@ namespace GetAway.Controllers
                     string path5 = Path.Combine(Server.MapPath("~/Images/Packages/"), Path.GetFileName(PackagePicture5.FileName));
                     string path6 = Path.Combine(Server.MapPath("~/Images/Packages/"), Path.GetFileName(PackagePicture6.FileName));
 
-                    var pp1Path = "/Images/Hotels/" + PackagePicture1.FileName;
-                    var pp2Path = "/Images/Hotels/" + PackagePicture2.FileName;
-                    var pp3Path = "/Images/Hotels/" + PackagePicture3.FileName;
-                    var pp4Path = "/Images/Hotels/" + PackagePicture4.FileName;
-                    var pp5Path = "/Images/Hotels/" + PackagePicture5.FileName;
-                    var pp6Path = "/Images/Hotels/" + PackagePicture6.FileName;
+                    var pp1Path = "/Images/Packages/" + PackagePicture1.FileName;
+                    var pp2Path = "/Images/Packages/" + PackagePicture2.FileName;
+                    var pp3Path = "/Images/Packages/" + PackagePicture3.FileName;
+                    var pp4Path = "/Images/Packages/" + PackagePicture4.FileName;
+                    var pp5Path = "/Images/Packages/" + PackagePicture5.FileName;
+                    var pp6Path = "/Images/Packages/" + PackagePicture6.FileName;
 
                     Package.PackagePicture1 = pp1Path;
                     Package.PackagePicture2 = pp2Path;

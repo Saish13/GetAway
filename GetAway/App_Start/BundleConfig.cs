@@ -9,7 +9,10 @@ namespace GetAway
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js"
+                       
+                        
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -38,10 +41,16 @@ namespace GetAway
                     "~/Scripts/js/classie.js",
                     "~/Scripts/js/selectFx.js",
                     "~/Scripts/js/main.js",
-                    "~/Scripts/js/modernizr-2.6.2.min.js"));
+                    "~/Scripts/js/modernizr-2.6.2.min.js",
+                    "~/Scripts/DataTables/jquery.dataTables.js",
+                    "~/Scripts/DataTables/dataTables.bootstrap.js",
+                    "~/Scripts/jquery-1.10.2.min.js",
+                    "~/Scripts/bootstrap.js",
+                        "~/Scripts/bootbox.js",
+                        "~/Scripts/respond.js"
+                    ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                    
                     "~/Content/css/animate.css",
                     "~/Content/css/icomoon.css",
                     "~/Content/css/bootstrap.css",
@@ -51,7 +60,10 @@ namespace GetAway
                     "~/Content/css/cs-select.css",
                     "~/Content/css/cs-skin-border.css",
                     "~/Content/css/style.css",
-                    "~/Content/css/font.css"));
+                    "~/Content/css/font.css",
+                    "~/Content/DataTables/css/dataTables.bootstrap.css"
+                     ));
+            
         }
     }
 }

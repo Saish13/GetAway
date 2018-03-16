@@ -551,9 +551,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\css\fonts\icomoon\" />
     <Folder Include="Content\font-awesome\" />
     <Folder Include="fonts\bootstrap\" />
-    <Folder Include="fonts\icomoon\" />
     <Folder Include="Images\Customers\" />
     <Folder Include="Images\Hotels\" />
     <Folder Include="Images\Packages\" />
