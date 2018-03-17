@@ -18,5 +18,9 @@ namespace GetAway.Controllers
         {
             return View();
         }
+        public ActionResult ViewPackage(int id)
+        {
+            return View();
+        }
     }
 }

@@ -381,6 +381,7 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
+    <Content Include="Content\bootstrap-combined.min.css" />
     <Content Include="Content\Scripts\bootstrap.bundle.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -390,6 +391,7 @@
     <Content Include="Content\Scripts\jquery.easing.min.js" />
     <Content Include="Content\Scripts\jquery.min.js" />
     <Content Include="Content\Scripts\sb-admin.min.js" />
+    <Content Include="Content\style.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
@@ -420,6 +422,7 @@
     <Content Include="Images\css\place-9.jpg" />
     <Content Include="Scripts\bootbox.js" />
     <Content Include="Scripts\bootbox.min.js" />
+    <Content Include="Scripts\bootstrap-view.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\toastr.scss" />
@@ -548,6 +551,7 @@
     <Content Include="Views\Administrators\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutClient.cshtml" />
     <Content Include="Views\Packages\ListPackages.cshtml" />
+    <Content Include="Views\Packages\ViewPackage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

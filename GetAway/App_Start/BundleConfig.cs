@@ -47,10 +47,14 @@ namespace GetAway
                     "~/Scripts/jquery-1.10.2.min.js",
                     "~/Scripts/bootstrap.js",
                         "~/Scripts/bootbox.js",
-                        "~/Scripts/respond.js"
+                        "~/Scripts/respond.js",
+                        "~/Scripts/app.js",
+                        "~/Scripts/jquery.js",
+                        "~/Scripts/bootstrap-view.min.js"
                     ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
+                
                     "~/Content/css/animate.css",
                     "~/Content/css/icomoon.css",
                     "~/Content/css/bootstrap.css",
@@ -59,6 +63,7 @@ namespace GetAway
                     "~/Content/css/bootstrap-datepicker.min.css",
                     "~/Content/css/cs-select.css",
                     "~/Content/css/cs-skin-border.css",
+                    "~/Content/css/style.css",
                     "~/Content/css/style.css",
                     "~/Content/css/font.css",
                     "~/Content/DataTables/css/dataTables.bootstrap.css"
