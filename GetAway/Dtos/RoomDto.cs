@@ -31,9 +31,6 @@ namespace GetAway.Dtos
 
         public byte RoomStatus { get; set; }
 
-        [ForeignKey("HotelID")]
-        public HotelDto Hotel { get; set; }
-
         [Required]
         public int HotelID { get; set; }
 

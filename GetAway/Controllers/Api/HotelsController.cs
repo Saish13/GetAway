@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Data.Entity;
 using System.Net.Http;
 using System.Web.Http;
 using GetAway.Dtos;
@@ -26,7 +27,7 @@ namespace GetAway.Controllers.Api
             return Ok(hotelDto);
         }
 
-        public IHttpActionResult GetHotels(int id)
+        public IHttpActionResult GetHotel(int id)
         {
             var hotel = _context.Hotel.SingleOrDefault(h => h.Id == id);
 

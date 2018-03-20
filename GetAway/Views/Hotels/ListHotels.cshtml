@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "ListPackages";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+
+<div id="fh5co-tours">
+
+    <div class="container">
+        <div class="form-group col-lg-12">
+            <table>
+                <tr>
+                    <td><input type="text" name="SearchBox" id="SearchBox" class="" width="600" /></td>
+                    <td><button id="Search" class="btn btn-primary"><b>SEARCH</b></button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <br />
+    <div class="container fh5co-blog animate-box fadeInUp animated">
+        <table border="0" id="hotels" class="table col-md-offset-1" align="center" cellpadding="10">
+            <thead>
+                <tr>
+                    <th class="col-md-2"></th>
+                    <th class="col-md-6"></th>
+                    <th class="col-md-2"> </th>
+                </tr>
+            </thead>
+            <tbody>
+                @*<tr>
+                        <td class="col-md-2" rowspan="2">
+
+                            <img src="~/Images/Packages/gulmarg.jpg" width="200" height="200" />
+
+                        </td>
+                        <td class="col-md-8" rowspan="2">
+                            <h2>Package Name</h2><br />
+                            Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet
+                            Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet
+                            Lorem ipsum dolor sit amet
+                        </td>
+                        <td class="col-md-2">
+                            <h3>Rs 1000</h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-3">
+                            <button class="btn-group-justified" name="View">VIEW</button>
+                        </td>
+                    </tr>*@
+                <!-- Data Here -->
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+@section Scripts
+{
+    <script>
+
+        // Datatable for search
+        $(document).ready(function () {
+            var table = $("#hotels").DataTable({
+                "bLengthChange": false,
+                "bFilter": false,
+                "bInfo": false,
+                "bAutoWidth": false,
+                "bSort": false,
+
+                ajax: {
+                    url: "/api/hotels/GetHotels",
+                    dataSrc: ""
+                },
+
+                columns: [
+                    {
+                        data: "hotelPicture1",
+                        render: function (data, meta) {
+                            return "<img src='.." + data + "' width='200' height='200' />"
+                        }
+
+                    },
+                    {
+                        data: "hotelName",
+                        render: function (data, type, hotel) {
+                            return "<h2>" + data + "</h2><br /><p>" + hotel.hotelDescription + "</p>"
+                        }
+                    },
+                    {
+                        data: "hotelRating",
+                        render: function (data, type, hotel) {
+                            return "<h3>Rs" + data + "</h3><br><a href='/Hotels/ViewHotel/" + hotel.id + "' class='btn btn-default'>View</a>"
+                        }
+                    }
+
+
+                ]
+
+            });
+
+
+        });
+
+    </script>
+}

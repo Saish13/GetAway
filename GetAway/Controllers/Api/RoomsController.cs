@@ -7,6 +7,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using GetAway.Dtos;
+using System.Data.Entity;
 
 namespace GetAway.Controllers.Api
 {
@@ -22,7 +23,18 @@ namespace GetAway.Controllers.Api
         // GET /api/rooms
         public IHttpActionResult GetRooms()
         {
-            var roomDto = _context.Room.ToList().Select(Mapper.Map<Room, RoomDto>);
+            var roomDto = _context.Room.SqlQuery("Select * from Room;").ToList().Select(Mapper.Map<Room, RoomDto>);
+            return Ok(roomDto);
+            //var roomDto = _context.Room.ToList().Select(Mapper.Map<Room, RoomDto>);
+            //return Ok(roomDto);
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetAvaiableRooms(int id)
+        {
+            byte EmpytRoom = 0;
+            var query = "select RoomType from Rooms where HotelId = '" + id + "' and RoomStatus = '" + EmpytRoom + "' group by RoomType;";
+            var roomDto = _context.Room.SqlQuery(query).ToList().Select(Mapper.Map<Room, RoomDto>);
             return Ok(roomDto);
         }
 

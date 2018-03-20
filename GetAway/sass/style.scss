@@ -1680,11 +1680,25 @@ div.cs-select{
 		color: $brand-white;
 		border: none!important;
 		border: 2px solid transparent!important;
+          height:50px;
 		&:hover, &:active, &:focus {
 			box-shadow: none;
 			background: $brand-primary;
 			color: $brand-white!important;
 		}
+	}
+    &.btn-compsearch {
+		background: $brand-primary;
+		color: $brand-white;
+		border: none!important;
+		border: 2px solid transparent!important;
+      
+        &:hover, &:active, &:focus {
+			box-shadow: none;
+			background: $brand-primary;
+			color: $brand-white!important;
+		}
+		
 	}
 	&:hover, &:active, &:focus {
 		background: #393e46!important;

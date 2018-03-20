@@ -48,9 +48,10 @@ namespace GetAway
                     "~/Scripts/bootstrap.js",
                         "~/Scripts/bootbox.js",
                         "~/Scripts/respond.js",
-                        "~/Scripts/app.js",
+                        
                         "~/Scripts/jquery.js",
                         "~/Scripts/bootstrap-view.min.js"
+
                     ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
