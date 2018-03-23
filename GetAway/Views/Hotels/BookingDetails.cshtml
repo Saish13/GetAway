@@ -1,0 +1,217 @@
+﻿
+@model GetAway.ViewModels.HotelBookingDetailsViewModel
+@{
+    ViewBag.Title = "BookingDetails";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+@section css
+{
+    <style>
+        table, tr, td {
+            border: none;
+        }
+    </style>
+
+}
+<br /><br />
+
+<div class="container" style="background-color:#FCFBFB">
+    <div class="row-fluid">
+        <div class="col-md-8">
+            <h1>@Model.User.UserName</h1>
+        </div>
+        <div class="col-md-4">
+            <h3 class="pull-right">Wallet : @Model.User.WalletAmount</h3>
+        </div>
+    </div>
+</div>
+<br /><br />
+<div class="container" style="background-color:#F8F8F8">
+    <div class="row-fluid">
+        <div class="col-md-6">
+            <table class="table">
+                <tr>
+                    <td>Name</td>
+                    <td>@Model.User.UserName</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>@Model.User.Email</td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td>@Model.User.Address</td>
+                </tr>
+                <tr>
+                    <td>Contact Number</td>
+                    <td>@Model.User.PhoneNumber</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <table class="table">
+                <tr>
+                    <td>Hotels Name</td>
+                    <td id="ajax-data-hotelname"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Hotels Address</td>
+                    <td id="ajax-data-address"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Hotels Contact Number</td>
+                    <td id="ajax-data-contactnumber"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Check in</td>
+                    <td><input type="text" class="form-control" id="check-in" placeholder="mm/dd/yyyy"></td>
+                    <td>Check out</td>
+                    <td><input type="text" class="form-control" id="check-out" placeholder="mm/dd/yyyy"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<br /><br />
+<div class="container" style="background-color:#F8F8F8">
+    <div class="row-fluid">
+        <div class="col-md-12" id="ajax-participant-names">
+            <table id="ajax-participant-names" class="table col-md-12" >
+                <tbody>
+                    <tr>
+                        <td >Rooms &nbsp;&nbsp; <b id="ajax-data-rooms">1</b></td>
+                        <td >Adults &nbsp;&nbsp;&nbsp;<button class="btn btn-info" id="js-addadults">+</button>&nbsp;&nbsp;&nbsp;<input type="text" id="adults" value="1" style="width:40px;text-align:center" disabled/>&nbsp;&nbsp;&nbsp;<button class="btn btn-info" id="js-removeadults">-</button></td>
+                        <td >Children &nbsp;&nbsp;&nbsp;<button class="btn btn-info" id="js-addchildren">+</button>&nbsp;&nbsp;&nbsp;<input type="text" id="children" value="0" style="width:40px;text-align:center" disabled/>&nbsp;&nbsp;&nbsp;<button class="btn btn-info" id="js-removechildren">-</button></td>
+                        <td ><button class="btn btn-primary" id="ajax-add-participant"><b>+</b></button></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- <div class="span12">
+                Participant Name<input type="text" name='name1'><button id="ajax-add-participant"><b>+</b></button>
+            </div> -->
+
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row-fluid">
+        <div class="col-md-12" id="ajax-names">
+            <input type="radio" name="payment" id="" /> Use Wallet
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row-fluid">
+        <div class="col-md-12" id="ajax-names">
+            <input type="radio" name="payment" id="" /> Others
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row-fluid wells">
+        <div class="col-md-12" id="ajax-names">
+            <button id="ajax-add-participant" class="btn btn-primary"><b>BUY</b></button>
+
+        </div>
+    </div>
+</div>
+<br /><br />
+@section Scripts
+{
+    <script src="~/Scripts/moment.js"></script>
+    <script>
+        $(document).ready(function () {
+        var maxAdutsAllowed = 3;
+        var maxChildrenAllowed = 3;
+        var total = 1;
+       
+        var currentTextBoxes = 1;
+        $.ajax({
+            url: "/api/Hotels/GetHotel/@Model.Hotel.Id",
+            method: "GET",
+            success: function (data) {
+                $("#ajax-data-hotelname").html(data.hotelName);
+                $("#ajax-data-address").html(data.hotelAddress);
+                $("#ajax-data-contactnumber").html(data.hotelContactNumber);
+
+            }
+        });
+
+            $("#js-addadults").on("click", "", function () {   
+                var txtadults = parseInt($("#adults").val());
+                if (txtadults < maxAdutsAllowed && total != 4) {
+                    $("#js-removeadults").disabled;
+                    txtadults++;
+                    total++;
+                }
+                else
+                    $("#js-addadults").disabled;
+                $("#adults").val(txtadults);
+            });
+
+            $("#js-removeadults").on("click", "", function () {
+                var txtadults = parseInt($("#adults").val());
+                if (txtadults > 1 && total != 4) {
+                    $("#js-addadults").enabled;
+                    txtadults--;
+                    total--;
+                }
+                else
+                    $("#js-removeadults").disabled;
+                $("#adults").val(txtadults);
+            });
+
+            $("#js-addchildren").on("click", "", function () {
+                var txtchildren = parseInt($("#children").val());
+                if (txtchildren < maxChildrenAllowed && total != 4) {
+                    $("#js-removechildren").enabled;
+                    txtchildren++;
+                    total++;
+                }
+                else
+                    $("#js-addchildren").disabled;
+                $("#children").val(txtchildren);
+            });
+
+            $("#js-removechildren").on("click", "", function () {
+                var txtchildren = parseInt($("#children").val());
+                if (txtchildren > 0 && total != 4) {
+                    $("#js-addchildren").enabled;
+                    txtchildren--;
+                    total--;
+                }
+                else
+                    $("#js-removechildren").disabled;
+                $("#children").val(txtchildren);
+            });
+
+        $("#ajax-add-participant").click(function(){
+            if(currentTextBoxes<4)
+            {
+                currentTextBoxes++;
+                $("#ajax-participant-names").attr("class","table")
+                $("#ajax-participant-names > tbody:last-child").append("<tr><td>Participant Name</td><td><input type='text' name='name1'></td><td>Participant Age</td><td><input type='text' name='name1'></td><td><button class='btn btn-danger js-removeparticipant' id='ajax-add-innerparticipant" + currentTextBoxes + "'><b>-</b></button></td></tr>");
+            }
+
+
+        });
+        $("body").on("click","button.js-removeparticipant",function(){
+                //var id = $(this).attr("id");
+                $(this).parents("tr").remove();
+                currentTextBoxes--;
+            });
+    });
+    </script>
+
+}
+

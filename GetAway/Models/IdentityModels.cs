@@ -41,6 +41,10 @@ namespace GetAway.Models
         public DbSet<Room> Room { get; set; }
         public DbSet<Feedback> Feedback { get; set; }
         public DbSet<Administrator> Administrator { get; set; }
+        public DbSet<RoomBooking> RoomBooking { get; set; }
+        public DbSet<PackageBooking> PackageBooking { get; set; }
+        public DbSet<PackageBookingParticipants> PackageBookingParticipants { get; set; }
+        public DbSet<RoomBookingParticipants> RoomBookingParticipants { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
