@@ -90,3 +90,4 @@ C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\bin\System.W
 C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.AddedWalletToCustomer.resources
 C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.AddedBookingTables.resources
 C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.AddedBookingParticipantsTable.resources
+C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.UserIDInPackageBooking.resources

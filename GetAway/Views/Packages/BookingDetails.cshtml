@@ -24,7 +24,7 @@
             <h1>@Model.User.UserName</h1>
         </div>
         <div class="col-md-4">
-            <h3 class="pull-right">Wallet : @Model.User.WalletAmount</h3>
+            <h3 class="pull-right">Wallet Balance : @Model.User.WalletAmount</h3>
         </div>
     </div>
 </div>
@@ -83,9 +83,9 @@
                 <tbody>
                     <tr>
                         <td>Participant Name</td>
-                        <td><input type="text" name='name1'></td>
+                        <td><input type="text" id='name1'></td>
                         <td>Participant Age</td>
-                        <td><input type="text" name='name1'></td>
+                        <td><input type="text" id='age1'></td>
                         <td><button class="btn btn-primary" id="ajax-add-participant"><b>+</b></button></td>
                     </tr>
                 </tbody>
@@ -99,25 +99,38 @@
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="row-fluid">
-        <div class="col-md-12" id="ajax-wallet" style="background-color:aqua">         
-                <input type="radio" name="payment" id="" /> Use Wallet
-        </div>
-    </div>
-</div>
+<br /><br />
 <div class="container">
     <div class="row-fluid">
         <div class="col-md-12" id="ajax-names">
-            <input type="radio" name="payment" id="" /> Others
+            <h2>Payment Methods</h2>
+        </div>
+    </div>
+</div>
+<br /><br />
+<div class="container">
+    <div class="row-fluid">
+        <div class="col-md-12" id="ajax-wallet" >         
+                <p class="col-md-2"><input class="radio-inline" type="radio" name="payment" id="wallet" />&nbsp;&nbsp;<b>Use Wallet</b> </p><br /><br />
+                <h3 class="col-md-4">Wallet Amount is Rs. @Model.User.WalletAmount</h3>
+                <h3 class="col-md-5" id="ajax-data-payable"> </h3>
+        </div>
+    </div>
+</div>
+<br /><br />
+<div class="container">
+    <div class="row-fluid">
+        <div class="col-md-12" id="ajax-names" >
+            <p class="col-md-3"><input class="radio-inline" type="radio" name="payment" id="card" />&nbsp;&nbsp;<b>Debit/Credit Card</b> </p><br /><br />
 
         </div>
     </div>
 </div>
+<br /><br />
 <div class="container">
     <div class="row-fluid wells">
         <div class="col-md-12" id="ajax-names">
-            <button id="ajax-add-participant" class="btn btn-primary"><b>BUY</b></button>
+            <button id="ajax-add-buy" class="btn btn-primary"><b>BUY</b></button>
 
         </div>
     </div>
@@ -130,6 +143,9 @@
     $(document).ready(function () {
 
         var currentTextBoxes = 1;
+        var totpayable = 0;
+        var discount = 0;
+        
         $.ajax({
             url: "/api/packages/GetPackage/@Model.Package.Id",
             method: "GET",
@@ -144,17 +160,74 @@
                     var enddate = moment(start).add(days, 'day').format('l');
                     $("#date-end").val(enddate);
                 });
+                var totalCost = parseInt(data.rate);
+                var payableAmount = Math.abs(@Model.User.WalletAmount - totalCost);
+                totpayable = payableAmount;
+                discount = data.discount;
+                $("#ajax-data-payable").html("Pay Rs. " + payableAmount + " from Debit/Credit card");
+                
             }
         });
 
-        
+        $("#ajax-add-buy").click(function () {
+            if($("#card").is(":checked") || $("#wallet").is(":checked") && $("#date-start").val() !=  "" && $("#date-end").val() !=  "" && $("#name1").val() !=  "" && $("#name2").val() !=  "")
+            {
+                $.ajax({
+                    url: "/api/PackageBooking/CreatePackageBooking",
+                    method: "POST",
+                    data: {
+                        Id: 0 ,
+                        BookingDate: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                        PackageStartDate: $("#date-start").val(),
+                        PackageEndDate: $("#date-end").val(),
+                        BookingStatus: 0, 
+                        PaymentStatus: 0,
+                        AdditionaInfo: "Info",
+                        PaidAmount: totpayable,
+                        DiscountReceived: discount,
+                        PackageId: @Model.Package.Id,
+                        UserID: "@Model.User.Id",
+                    },
+                    success: function(data)
+                    {
+                        var obj =  {};
+                        for(i=1;i<=4;i++)
+                            obj[i] = {ParticipantName: $("#name"+ i).val(), ParticipantAge: $("#age" + i).val(),}
+                    
+                        alert(obj[3].ParticipantName + "||" + obj[3].ParticipantAge);
+
+                        for(i=1;i<=4;i++)
+                        {
+                            if(obj[i].ParticipantName != null)
+                            {
+                                $.ajax({
+                                    url: "/api/PackageBookingParticipants/CreateParticipants",
+                                    method: "POST",
+                                    data: {
+                                        Id: 0,
+                                        ParticipantName: obj[i].ParticipantName,
+                                        ParticipantAge: obj[i].ParticipantAge,
+                                        PackageBookingId: data.id,
+                                    }
+                                });
+                            }  
+                        }
+                    
+                    }
+                });
+            }  
+            else
+            {
+                bootbox.alert("Please fill up the fields")
+            }
+        });
 
         $("#ajax-add-participant").click(function(){
             if(currentTextBoxes<4)
             {
                 currentTextBoxes++;
                 $("#ajax-participant-names").attr("class","table")
-                $("#ajax-participant-names > tbody:last-child").append("<tr><td>Participant Name</td><td><input type='text' name='name1'></td><td>Participant Age</td><td><input type='text' name='name1'></td><td><button class='btn btn-danger js-removeparticipant' id='ajax-add-innerparticipant" + currentTextBoxes + "'><b>-</b></button></td></tr>");
+                $("#ajax-participant-names > tbody:last-child").append("<tr><td>Participant Name</td><td><input type='text' id='name" + currentTextBoxes + "'></td><td>Participant Age</td><td><input type='text' id='age" + currentTextBoxes + "'></td><td><button class='btn btn-danger js-removeparticipant' id='ajax-add-innerparticipant" + currentTextBoxes + "'><b>-</b></button></td></tr>");
             }
 
 

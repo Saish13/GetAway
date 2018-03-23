@@ -267,6 +267,10 @@
     <Compile Include="Migrations\201803230831486_AddedBookingParticipantsTable.Designer.cs">
       <DependentUpon>201803230831486_AddedBookingParticipantsTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803231403068_UserIDInPackageBooking.cs" />
+    <Compile Include="Migrations\201803231403068_UserIDInPackageBooking.Designer.cs">
+      <DependentUpon>201803231403068_UserIDInPackageBooking.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Administrator.cs" />
@@ -649,6 +653,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803230831486_AddedBookingParticipantsTable.resx">
       <DependentUpon>201803230831486_AddedBookingParticipantsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803231403068_UserIDInPackageBooking.resx">
+      <DependentUpon>201803231403068_UserIDInPackageBooking.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

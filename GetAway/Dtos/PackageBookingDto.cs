@@ -40,7 +40,8 @@ namespace GetAway.Dtos
 
         public int PackageId { get; set; }
 
-        public int UserID { get; set; }
+        [StringLength(128)]
+        public string UserID { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }
