@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewBag.Title = "ListPackages";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+@section css
+{
+    <style>
+        .search-navbar-input {
+            padding: 11px 16px;
+            border-radius: 2px 0 0 2px;
+            border: 0 none;
+            outline: 0 none;
+            font-size: 15px;
+        }
+
+        .search-navbar-button {
+            background-color: #ffe11b;
+            border: 1px solid #ffe11b;
+            color: #565656;
+            padding: 10px 0;
+            height: 45px;
+            cursor: pointer;
+        }
+
+        .smallsearch {
+            margin-left: 15px;
+            margin-top: 15px;
+        }
+    </style>
+}
+
+@*    <div class="container">
+
+
+                     <div class="col-md-9 col-md-offset-1"><input class="col-md-12" type="text" name="SearchBox" id="SearchBox" width="650" style="border-radius:7px;max-width:600px" /></div>
+
+                     <div class="col-md-2 "><button id="Search" class="btn btn-primary"><b>SEARCH</b></button> </div>
+
+
+
+
+    </div>*@
+<br />
+<div class="container">
+
+    <div class="search-navbar-search smallsearch col-md-12 col-xs-11 ">
+        <div class="row " style="border:solid 1px">
+            <input class="search-navbar-input col-md-10 col-xs-8" type="" placeholder="Search for Products, Brands and more" name="" style="border:solid 1px">
+
+            <button class="btn btn-primary col-md-2 col-xs-4 pull-right">
+                <b>SEARCH</b>
+            </button>
+        </div>
+    </div>
+</div>
+
+<br /><br />
+<div class="container fh5co-blog animate-box fadeInUp animated">
+    <table border="0" id="packages" class="table col-md-offset-1" align="center" cellpadding="10">
+        <thead>
+            <tr>
+                <th class="col-md-2"></th>
+                <th class="col-md-6"></th>
+                <th class="col-md-2"> </th>
+            </tr>
+        </thead>
+        <tbody>
+            @*<tr>
+                    <td class="col-md-2" rowspan="2">
+
+                        <img src="~/Images/Packages/gulmarg.jpg" width="200" height="200" />
+
+                    </td>
+                    <td class="col-md-8" rowspan="2">
+                        <h2>Package Name</h2><br />
+                        Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet
+                        Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet
+                        Lorem ipsum dolor sit amet
+                    </td>
+                    <td class="col-md-2">
+                        <h3>Rs 1000</h3>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-3">
+                        <button class="btn-group-justified" name="View">VIEW</button>
+                    </td>
+                </tr>*@
+            <!-- Data Here -->
+        </tbody>
+    </table>
+</div>
+
+
+@section Scripts
+{
+    <script>
+
+        // Datatable for search
+        $(document).ready(function () {
+            var table = $("#packages").DataTable({
+                "bLengthChange": false,
+                "bFilter": false,
+                "bInfo": false,
+                "bAutoWidth": false,
+                "bSort": false,
+
+                ajax: {
+                    url: "/api/packages/GetPackages",
+                    dataSrc: ""
+                },
+
+                columns: [
+                    {
+                        data: "packagePicture1",
+                        render: function (data, meta) {
+                            return "<img src='.." + data + "' width='200' height='200' />"
+                        }
+
+                    },
+                    {
+                        data: "packageName",
+                        render: function (data, type, package) {
+                            return "<h2>" + data + "</h2><br /><p>" + package.packageDescription + "</p>"
+                        }
+                    },
+                    {
+                        data: "rate",
+                        render: function (data, type, package) {
+                            return "<h3>Rs" + data + "</h3><br><a href='/Packages/ViewPackage/" + package.id + "' class='btn btn-default'>View</a>"
+                        }
+                    }
+
+
+                ]
+
+            });
+
+
+        });
+
+    </script>
+}

@@ -1,0 +1,171 @@
+﻿
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
+@using Microsoft.AspNet.Identity.EntityFramework;
+@using GetAway.Models;
+@model GetAway.ViewModels.BookingDetailsViewModel
+@{
+    ViewBag.Title = "BookingDetails";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+@section css
+{
+<style>
+      table,tr,td{
+          border:none;
+      }
+</style>
+   
+}
+<br /><br />
+<div class="container" style="background-color:#FCFBFB">
+    <div class="row-fluid">
+        <div class="col-md-8">
+            <h1>@Model.User.UserName</h1>
+        </div>
+        <div class="col-md-4">
+            <h3 class="pull-right">Wallet : @Model.User.WalletAmount</h3>
+        </div>
+    </div>
+</div>
+<br /><br />
+<div class="container" style="background-color:#F8F8F8">
+    <div class="row-fluid">
+        <div class="col-md-6">
+            <table class="table">
+                <tr>
+                    <td>Name</td>
+                    <td>@Model.User.UserName</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>@Model.User.Email</td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td>@Model.User.Address</td>
+                </tr>
+                <tr>
+                    <td>Contact Number</td>
+                    <td>@Model.User.PhoneNumber</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <table class="table">
+                <tr>
+                    <td>Package Name</td>
+                    <td id="ajax-data-pkgname"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Package Duration</td>
+                    <td id="ajax-data-duration"></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Start Date</td>
+                    <td><input type="text" class="form-control" id="date-start" placeholder="mm/dd/yyyy"></td>
+                    <td>End Date</td>
+                    <td><input type="text" class="form-control" id="date-end" placeholder="mm/dd/yyyy" disabled></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<br /><br />
+<div class="container" style="background-color:#F8F8F8">
+    <div class="row-fluid">
+        <div class="col-md-12" id="ajax-participant-names">
+            <table id="ajax-participant-names" class="table">
+                <tbody>
+                    <tr>
+                        <td>Participant Name</td>
+                        <td><input type="text" name='name1'></td>
+                        <td>Participant Age</td>
+                        <td><input type="text" name='name1'></td>
+                        <td><button class="btn btn-primary" id="ajax-add-participant"><b>+</b></button></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- <div class="span12">
+                Participant Name<input type="text" name='name1'><button id="ajax-add-participant"><b>+</b></button>
+            </div> -->
+
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row-fluid">
+        <div class="col-md-12" id="ajax-wallet" style="background-color:aqua">         
+                <input type="radio" name="payment" id="" /> Use Wallet
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row-fluid">
+        <div class="col-md-12" id="ajax-names">
+            <input type="radio" name="payment" id="" /> Others
+
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row-fluid wells">
+        <div class="col-md-12" id="ajax-names">
+            <button id="ajax-add-participant" class="btn btn-primary"><b>BUY</b></button>
+
+        </div>
+    </div>
+</div>
+<br /><br />
+@section Scripts
+{
+<script src="~/Scripts/moment.js"></script>
+<script>
+    $(document).ready(function () {
+
+        var currentTextBoxes = 1;
+        $.ajax({
+            url: "/api/packages/GetPackage/@Model.Package.Id",
+            method: "GET",
+            success: function (data) {
+                $("#ajax-data-pkgname").html(data.packageName);
+                $("#ajax-data-duration").html(data.packageDuration);
+                var duration = data.packageDuration;
+                $("#date-start").on("change", "", function () {
+                    var start = $("#date-start").val();
+                    var s = new Date(start);
+                    var days = duration / 24;
+                    var enddate = moment(start).add(days, 'day').format('l');
+                    $("#date-end").val(enddate);
+                });
+            }
+        });
+
+        
+
+        $("#ajax-add-participant").click(function(){
+            if(currentTextBoxes<4)
+            {
+                currentTextBoxes++;
+                $("#ajax-participant-names").attr("class","table")
+                $("#ajax-participant-names > tbody:last-child").append("<tr><td>Participant Name</td><td><input type='text' name='name1'></td><td>Participant Age</td><td><input type='text' name='name1'></td><td><button class='btn btn-danger js-removeparticipant' id='ajax-add-innerparticipant" + currentTextBoxes + "'><b>-</b></button></td></tr>");
+            }
+
+
+        });
+        $("body").on("click","button.js-removeparticipant",function(){
+                //var id = $(this).attr("id");
+                $(this).parents("tr").remove();
+                currentTextBoxes--;
+            });
+    });
+</script>
+
+}
+

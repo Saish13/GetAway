@@ -1,0 +1,292 @@
+﻿@model GetAway.Models.Package
+@{
+    ViewBag.Title = "ViewPackage";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+
+}
+<link rel="stylesheet" href="/Content/bootstrap-combined.min.css" type="text/css" />
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            
+            $.ajax({
+                url: "/api/packages/GetPackage/@Model.Id",
+                method: "GET",
+                success: function (data) {
+                    $("#ajax-data-pkgname").html(data.packageName);
+                    $("#ajax-data-img1").attr("src", data.packagePicture1);
+                    $("#ajax-data-img1").attr("data-src", data.packagePicture1);
+                    
+                    $("#ajax-data-img2").attr("src", data.packagePicture2);
+                    $("#ajax-data-img2").attr("data-src", data.packagePicture2);
+
+                    $("#ajax-data-img3").attr("src", data.packagePicture3);
+                    $("#ajax-data-img3").attr("data-src", data.packagePicture3);
+
+
+                    $("#ajax-data-img4").attr("src", data.packagePicture4);
+                    $("#ajax-data-img4").attr("data-src", data.packagePicture4);
+
+                    $("#ajax-data-img5").attr("src", data.packagePicture5);
+                    $("#ajax-data-img5").attr("data-src", data.packagePicture5);
+
+                    $("#ajax-data-img6").attr("src", data.packagePicture6);
+                    $("#ajax-data-img6").attr("data-src", data.packagePicture6);
+
+                    $("#ajax-data-img7").attr("src", data.packagePicture1);
+                    $("#ajax-data-img7").attr("data-src", data.packagePicture1);
+
+                    $("#ajax-data-shortdesc").html(data.packageDescription);
+
+                    var rate = data.rate;
+                    var discount = data.discount;
+                    if (discount == 0)
+                    {
+                        $("#ajax-data-price").html("<dt>List Price</dt><dd> Rs. " + data.rate + "</dd>");
+                    }
+                    else
+                    {
+                        var newrate = rate - (rate*(discount/100))
+                        $("#ajax-data-price").html("<dt>List Price</dt><dd><s> Rs. " + data.rate + "</s></dd><dt>Sale Price</dt><dd> Rs. " + newrate + "</dd>");
+                        
+                    }
+                    $("#ajax-data-description").html(data.packageDescription);
+                    $("#ajax-data-activities").html(data.packageActivities);
+                    
+
+                    $('.side-image').click(function () {
+                        var $imageLink = $(this).find('img').data('src');
+                        $('.main-image').find('img').attr('src', $imageLink);
+                    });
+
+                }
+
+            });
+        });
+</script>
+
+}
+    <div class="container">
+        <br /><br />
+        <div class="row-fluid">
+            <div class="span12">
+                <h1 id="ajax-data-pkgname"></h1>
+            </div>
+        </div>
+        <br />
+        <div class="row-fluid">
+            <div class="span8">
+                <div class="block">
+                    <div class="block-content collapse in">
+                        <div class="span12">
+                            <div class="row-fluid">
+                                <div class="span10">
+                                    <br />
+                                    <div class="main-image">
+                                        <img id="ajax-data-img1" src='' height="400" width="550"/>
+                                    </div>
+                                </div>
+                                <div class="span2 side-images">
+                                    <div class="row-fluid">
+                                        <div class="span12 side-image">
+                                            <a href='javascript:;'><img id="ajax-data-img2" src='' data-src="" height="100" width="100" /></a>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row-fluid">
+                                        <div class="span12 side-image">
+                                            <a href='javascript:;'><img id="ajax-data-img3" height="100" width="100" src='http://placehold.it/90x80&text=Image+B' data-src="http://placehold.it/550x400&text=Image+B" /></a>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row-fluid">
+                                        <div class="span12 side-image">
+                                            <a href='javascript:;'><img id="ajax-data-img4" height="100" width="100" src='http://placehold.it/90x80&text=Image+C' data-src="http://placehold.it/550x400&text=Image+C" /></a>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row-fluid">
+                                        <div class="span12 side-image">
+                                            <a href='javascript:;'><img id="ajax-data-img5" height="100" width="100" src='http://placehold.it/90x80&text=Image+D' data-src="http://placehold.it/550x400&text=Image+D" /></a>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row-fluid">
+                                        <div class="span12 side-image">
+                                            <a href='javascript:;'><img id="ajax-data-img6" height="100" width="100" src='http://placehold.it/90x80&text=Image+E' data-src="http://placehold.it/550x400&text=Image+E" /></a>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row-fluid">
+                                        <div class="span12 side-image">
+                                            <a href='javascript:;'><img id="ajax-data-img7" height="100" width="100" src='http://placehold.it/90x80&text=Image+F' data-src="http://placehold.it/550x400&text=Image+F" /></a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="span4">
+                <div class="block">
+            
+                    <div class="block-content collapse in">
+                        <div class="span12">
+                            <h5 id="ajax-data-pkgname"></h5>
+                            <p class="muted" id="ajax-data-shortdesc">
+                               <br /><br />
+                            <p>
+                                <dl id="ajax-data-price" class="dl-horizontal">
+                                    
+                                </dl>
+                            </p>
+                            <br />
+                            <p>
+                                <a href="@Model.Id/BookingDetails" class="btn btn-primary">Buy</a>
+                            </p>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br /><br />
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="block">
+                    <div class="navbar navbar-inner block-header navbar-no-padding">
+                        <ul class="nav span12">
+                            <li class="active"><a href="#description" data-toggle="tab">Description</a></li>
+                            <li><a href="#act" data-toggle="tab">Activities</a></li>
+                            <li><a href="#reviews" data-toggle="tab">Reviews <span class="badge badge-info">3</span></a></li>
+
+                        </ul>
+                    </div>
+                    <div class="block-content collapse in">
+                        <div class="span12">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="description">
+                                    <p id="ajax-data-description">
+
+                                    </p>
+                                </div>
+                                <div class="tab-pane" id="act">
+                                    <p id="ajax-data-activities">
+                                        
+                                    </p>
+       
+                                </div>
+                                <div class="tab-pane" id="reviews">
+                                    <ul class="media-list">
+                                        <li class="media">
+                                            <div class="pull-left">
+                                                <a href="#">
+                                                    <img class="media-object" src="http://placehold.it/64x64" />
+                                                </a>
+                                                <div><small class="muted">Sep 10<br />10:11 AM</small></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading">Jason C.</h4>
+                                                <div class="well well-small">
+                                                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="media">
+                                            <div class="pull-left">
+                                                <a href="#">
+                                                    <img class="media-object" src="http://placehold.it/64x64" />
+                                                </a>
+                                                <div><small class="muted">Sep 13<br />9:45 AM</small></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading">Adam Johns.</h4>
+                                                <div class="well well-small">
+                                                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="media">
+                                            <div class="pull-left">
+                                                <a href="#">
+                                                    <img class="media-object" src="http://placehold.it/64x64" />
+                                                </a>
+                                                <div><small class="muted">Aug 11<br />6:46 PM</small></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h4 class="media-heading">Amy Johnson.</h4>
+                                                <div class="well well-small">
+                                                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tab-pane" id="related">
+                                    <div class="row-fluid">
+                                        <ul class="thumbnails">
+                                            <li class="span3">
+                                                <div class="thumbnail">
+                                                    <img alt="230x200" src="http://placehold.it/230x200">
+                                                    <div class="caption">
+                                                        <h3>Product A</h3>
+                                                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                                                        <p><a href="checkout.html" class="btn btn-primary">Add To Cart</a> <a href="view.html" class="btn">View</a></p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="span3">
+                                                <div class="thumbnail">
+                                                    <img alt="230x200" src="http://placehold.it/230x200">
+                                                    <div class="caption">
+                                                        <h3>Product B</h3>
+                                                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                                                        <p><a href="checkout.html" class="btn btn-primary">Add To Cart</a> <a href="view.html" class="btn">View</a></p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="span3">
+                                                <div class="thumbnail">
+                                                    <img alt="230x200" src="http://placehold.it/230x200">
+                                                    <div class="caption">
+                                                        <h3>Product C</h3>
+                                                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                                                        <p><a href="checkout.html" class="btn btn-primary">Add To Cart</a> <a href="view.html" class="btn">View</a></p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="span3">
+                                                <div class="thumbnail">
+                                                    <img alt="230x200" src="http://placehold.it/230x200">
+                                                    <div class="caption">
+                                                        <h3>Product D</h3>
+                                                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                                                        <p><a href="checkout.html" class="btn btn-primary">Add To Cart</a> <a href="view.html" class="btn">View</a></p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <hr>
+
+    </div>
+
+
