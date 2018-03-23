@@ -190,7 +190,11 @@
     <Compile Include="Controllers\Api\AccountsController.cs" />
     <Compile Include="Controllers\Api\FeedbacksController.cs" />
     <Compile Include="Controllers\Api\HotelsController.cs" />
+    <Compile Include="Controllers\Api\PackageBookingController.cs" />
+    <Compile Include="Controllers\Api\PackageBookingParticipantsController.cs" />
     <Compile Include="Controllers\Api\PackagesController.cs" />
+    <Compile Include="Controllers\Api\RoomBookingController.cs" />
+    <Compile Include="Controllers\Api\RoomBookingParticipantsController.cs" />
     <Compile Include="Controllers\Api\RoomsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HotelsController.cs" />
@@ -198,7 +202,11 @@
     <Compile Include="Controllers\PackagesController.cs" />
     <Compile Include="Dtos\FeedbackDto.cs" />
     <Compile Include="Dtos\HotelDto.cs" />
+    <Compile Include="Dtos\PackageBookingDto.cs" />
+    <Compile Include="Dtos\PackageBookingParticipantsDto.cs" />
     <Compile Include="Dtos\PackageDto.cs" />
+    <Compile Include="Dtos\RoomBookingDto.cs" />
+    <Compile Include="Dtos\RoomBookingParticipantsDto.cs" />
     <Compile Include="Dtos\RoomDto.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -276,6 +284,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AddRoomViewModel.cs" />
     <Compile Include="ViewModels\BookingDetailsViewModel.cs" />
+    <Compile Include="ViewModels\BookingsViewModel.cs" />
     <Compile Include="ViewModels\HotelBookingDetailsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

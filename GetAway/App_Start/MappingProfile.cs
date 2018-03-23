@@ -23,6 +23,19 @@ namespace GetAway.App_Start
 
             Mapper.CreateMap<Feedback, FeedbackDto>();
             Mapper.CreateMap<FeedbackDto, Feedback>();
+
+            Mapper.CreateMap<PackageBooking, PackageBookingDto>();
+            Mapper.CreateMap<PackageBookingDto, PackageBooking>();
+
+            Mapper.CreateMap<RoomBooking, RoomBookingDto>();
+            Mapper.CreateMap<RoomBookingDto, RoomBooking>();
+
+            Mapper.CreateMap<PackageBookingParticipants, PackageBookingParticipantsDto>();
+            Mapper.CreateMap<PackageBookingParticipantsDto, PackageBookingParticipants>();
+
+            Mapper.CreateMap<RoomBookingParticipants, RoomBookingParticipantsDto>();
+            Mapper.CreateMap<RoomBookingParticipantsDto, RoomBookingParticipants>();
+
         }
     }
 }
