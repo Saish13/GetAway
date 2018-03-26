@@ -1,4 +1,8 @@
 ﻿
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.Owin;
+@using Microsoft.AspNet.Identity.EntityFramework;
+@using GetAway.Models;
 @model GetAway.ViewModels.HotelBookingDetailsViewModel
 @{
     ViewBag.Title = "BookingDetails";
@@ -21,7 +25,7 @@
             <h1>@Model.User.UserName</h1>
         </div>
         <div class="col-md-4">
-            <h3 class="pull-right">Wallet : @Model.User.WalletAmount</h3>
+            <h3 class="pull-right">Wallet Balance : Rs. @Model.User.WalletAmount</h3>
         </div>
     </div>
 </div>
@@ -52,27 +56,27 @@
             <table class="table">
                 <tr>
                     <td>Hotels Name</td>
-                    <td id="ajax-data-hotelname"></td>
+                    <td id="ajax-data-hotelname">@Model.Hotel.HotelName</td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>Hotels Address</td>
-                    <td id="ajax-data-address"></td>
+                    <td id="ajax-data-address">@Model.Hotel.HotelAddress</td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>Hotels Contact Number</td>
-                    <td id="ajax-data-contactnumber"></td>
+                    <td id="ajax-data-contactnumber">@Model.Hotel.HotelContactNumber</td>
                     <td></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>Check in</td>
-                    <td><input type="text" class="form-control" id="check-in" placeholder="mm/dd/yyyy"></td>
+                    <td><input type="text" class="form-control" id="checkin" placeholder="mm/dd/yyyy"></td>
                     <td>Check out</td>
-                    <td><input type="text" class="form-control" id="check-out" placeholder="mm/dd/yyyy"></td>
+                    <td><input type="text" class="form-control" id="checkout" placeholder="mm/dd/yyyy"></td>
                 </tr>
             </table>
         </div>
@@ -85,10 +89,11 @@
             <table id="ajax-participant-names" class="table col-md-12" >
                 <tbody>
                     <tr>
-                        <td >Rooms &nbsp;&nbsp; <b id="ajax-data-rooms">1</b></td>
-                        <td >Adults &nbsp;&nbsp;&nbsp;<button class="btn btn-info" id="js-addadults">+</button>&nbsp;&nbsp;&nbsp;<input type="text" id="adults" value="1" style="width:40px;text-align:center" disabled/>&nbsp;&nbsp;&nbsp;<button class="btn btn-info" id="js-removeadults">-</button></td>
-                        <td >Children &nbsp;&nbsp;&nbsp;<button class="btn btn-info" id="js-addchildren">+</button>&nbsp;&nbsp;&nbsp;<input type="text" id="children" value="0" style="width:40px;text-align:center" disabled/>&nbsp;&nbsp;&nbsp;<button class="btn btn-info" id="js-removechildren">-</button></td>
-                        <td ><button class="btn btn-primary" id="ajax-add-participant"><b>+</b></button></td>
+                        <td>Rooms </td>
+                        <td>&nbsp;&nbsp;<select id="ajax-data-RoomType"><option></option></select></td>
+                        <td>Adults &nbsp;&nbsp;&nbsp;<button class="btn btn-info" id="js-addadults">+</button>&nbsp;&nbsp;&nbsp;<input type="text" id="adults" value="1" style="width:40px;text-align:center" disabled />&nbsp;&nbsp;&nbsp;<button class="btn btn-info" id="js-removeadults">-</button></td>
+                        <td>Children &nbsp;&nbsp;&nbsp;<button class="btn btn-info" id="js-addchildren">+</button>&nbsp;&nbsp;&nbsp;<input type="text" id="children" value="0" style="width:40px;text-align:center" disabled />&nbsp;&nbsp;&nbsp;<button class="btn btn-info" id="js-removechildren">-</button></td>
+                        <td><button class="btn btn-primary" id="ajax-add-participant"><b>+</b></button></td>
                     </tr>
                 </tbody>
             </table>
@@ -101,26 +106,38 @@
         </div>
     </div>
 </div>
+<br /><br />
 <div class="container">
     <div class="row-fluid">
         <div class="col-md-12" id="ajax-names">
-            <input type="radio" name="payment" id="" /> Use Wallet
+            <h2>Payment Methods</h2>
+        </div>
+    </div>
+</div>
+<br /><br />
+<div class="container">
+    <div class="row-fluid">
+        <div class="col-md-12" id="ajax-wallet">
+            <p class="col-md-2"><input class="radio-inline" type="radio" name="payment" id="wallet" />&nbsp;&nbsp;<b>Use Wallet</b> </p><br /><br />
+            <h3 class="col-md-4">Wallet Amount is Rs. @Model.User.WalletAmount</h3>
+            <h3 class="col-md-5" id="ajax-data-payable"> </h3>
+        </div>
+    </div>
+</div>
+<br /><br />
+<div class="container">
+    <div class="row-fluid">
+        <div class="col-md-12" id="ajax-names">
+            <p class="col-md-3"><input class="radio-inline" type="radio" name="payment" id="card" />&nbsp;&nbsp;<b>Debit/Credit Card</b> </p><br /><br />
 
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="row-fluid">
-        <div class="col-md-12" id="ajax-names">
-            <input type="radio" name="payment" id="" /> Others
-
-        </div>
-    </div>
-</div>
+<br /><br />
 <div class="container">
     <div class="row-fluid wells">
         <div class="col-md-12" id="ajax-names">
-            <button id="ajax-add-participant" class="btn btn-primary"><b>BUY</b></button>
+            <button id="ajax-add-buy" class="btn btn-primary"><b>BUY</b></button>
 
         </div>
     </div>
@@ -134,8 +151,10 @@
         var maxAdutsAllowed = 3;
         var maxChildrenAllowed = 3;
         var total = 1;
-       
+        var currentRoomId = 0;
+        var totpayable = 0;
         var currentTextBoxes = 1;
+        var roomId = 0;
         $.ajax({
             url: "/api/Hotels/GetHotel/@Model.Hotel.Id",
             method: "GET",
@@ -143,73 +162,201 @@
                 $("#ajax-data-hotelname").html(data.hotelName);
                 $("#ajax-data-address").html(data.hotelAddress);
                 $("#ajax-data-contactnumber").html(data.hotelContactNumber);
-
             }
         });
 
-            $("#js-addadults").on("click", "", function () {   
-                var txtadults = parseInt($("#adults").val());
-                if (txtadults < maxAdutsAllowed && total != 4) {
-                    $("#js-removeadults").disabled;
-                    txtadults++;
-                    total++;
-                }
-                else
-                    $("#js-addadults").disabled;
-                $("#adults").val(txtadults);
-            });
 
-            $("#js-removeadults").on("click", "", function () {
-                var txtadults = parseInt($("#adults").val());
-                if (txtadults > 1 && total != 4) {
-                    $("#js-addadults").enabled;
-                    txtadults--;
-                    total--;
-                }
-                else
-                    $("#js-removeadults").disabled;
-                $("#adults").val(txtadults);
-            });
+        $.ajax({
+            url: "/api/rooms/GetRoomType/@Model.Hotel.Id",
+            method: "GET",
+            success: function (data) {
+                $.each(data, function(i, item) {
+                    $('#ajax-data-RoomType').append("<option>"+ item.roomType +"</option>");
+                });
+            }
+        });
 
-            $("#js-addchildren").on("click", "", function () {
-                var txtchildren = parseInt($("#children").val());
-                if (txtchildren < maxChildrenAllowed && total != 4) {
-                    $("#js-removechildren").enabled;
-                    txtchildren++;
-                    total++;
+        $("#ajax-data-RoomType").change(function () {
+            var RoomType = $("#ajax-data-RoomType").val();
+            $.ajax({
+                url: "/api/rooms/GetRoomRate/"+ RoomType +"/@Model.Hotel.Id",
+                method: "GET",
+                success: function (data) {
+                    totalCost = parseInt(data.roomRate)
+                    totpayable = totalCost;
+                    roomId = data.id;
+                    alert(roomId);
+                    var payableAmount = Math.abs(@Model.User.WalletAmount - totalCost);
+                    if (payableAmount > 0)
+                        $("#ajax-data-payable").html("Total room cost is Rs. " + data.roomRate + "<br/><br/>Pay Rs. " + payableAmount + " from Debit/Credit card")
                 }
-                else
-                    $("#js-addchildren").disabled;
-                $("#children").val(txtchildren);
             });
+        });
 
-            $("#js-removechildren").on("click", "", function () {
-                var txtchildren = parseInt($("#children").val());
-                if (txtchildren > 0 && total != 4) {
-                    $("#js-addchildren").enabled;
-                    txtchildren--;
-                    total--;
-                }
-                else
-                    $("#js-removechildren").disabled;
-                $("#children").val(txtchildren);
-            });
+        $("#ajax-add-buy").click(function () {
+            if($("#card").is(":checked") || $("#wallet").is(":checked") && $("#date-start").val() !=  "" && $("#date-end").val() !=  "" && $("#name1").val() !=  "" && $("#name2").val() !=  "")
+            {
+                $.ajax({
+                    url: "/api/RoomBooking/CreatePackageBooking",
+                    method: "POST",
+                    data: {
+                        Id: 0 ,
+                        BookingDate: new Date().toISOString().slice(0, 19).replace('T', ' '),
+                        RoomStartDate: $("#checkin").val(),
+                        RoomEndDate: $("#checkout").val(),
+                        BookingStatus: 0,
+                        PaymentStatus: 0,
+                        AdditionaInfo: "Info",
+                        PaidAmount: totpayable,
+                        DiscountReceived: 0,
+                        RoomId: roomId,
+                        UserID: "@Model.User.Id",
+                    },
+                    success: function(data)
+                    {
+                            
+                        var obj =  {};
+                        for(i=1;i<=4;i++)
+                            obj[i] = {ParticipantName: $("#name"+ i).val(), ParticipantAge: $("#age" + i).val(),}
+
+
+
+                        for(i=1;i<=4;i++)
+                        {
+                            if(obj[i].ParticipantName != null)
+                            {
+                                $.ajax({
+                                    url: "/api/RoomBookingParticipants/CreateParticipants",
+                                    method: "POST",
+                                    data: {
+                                        Id: 0,
+                                        ParticipantName: obj[i].ParticipantName,
+                                        ParticipantAge: obj[i].ParticipantAge,
+                                        RoomBookingId: data.id,
+                                    }
+                                });
+                            }
+                        }
+
+                        $.ajax({
+                            url: "/api/Rooms/GetRoom/" + roomId,
+                            method: "GET",
+                            success: function (data) {
+                                $.ajax({
+                                    url: "/api/Rooms/UpdateRoom/" + roomId,
+                                    method: "PUT",
+                                    data: {
+                                        Id: data.id,
+                                        RoomType: data.roomType,
+                                        RoomPicture1: data.roomPicture1,
+                                        RoomPicture2: data.roomPicture2,
+                                        RoomPicture3: data.roomPicture3,
+                                        RoomDescription: data.roomDescription,
+                                        RoomStatus: 1,
+                                        RoomRate: data.roomRate,
+                                        RoomNumber: data.roomNumber,
+                                        HotelID: data.hotelID,
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
+            }
+            else
+            {
+                bootbox.alert("Please fill up the fields")
+            }
+        });
+
+        $("#js-addadults").on("click", "", function () {
+            var txtadults = parseInt($("#adults").val());
+            if (txtadults < maxAdutsAllowed && total <= 4) {
+                $("#js-removeadults").disabled;
+                txtadults++;
+                total++;
+                currentTextBoxes++;
+                console.log(currentTextBoxes);
+
+            }
+            else
+                $("#js-addadults").disabled;
+            $("#adults").val(txtadults);
+        });
+
+        $("#js-removeadults").on("click", "", function () {
+            var txtadults = parseInt($("#adults").val());
+            if (txtadults > 1 && total <= 4) {
+                $("#js-addadults").enabled;
+                txtadults--;
+                total--;
+                currentTextBoxes--;
+                console.log(currentTextBoxes);
+
+            }
+            else
+                $("#js-removeadults").disabled;
+            $("#adults").val(txtadults);
+        });
+
+        $("#js-addchildren").on("click", "", function () {
+            var txtchildren = parseInt($("#children").val());
+            if (txtchildren < maxChildrenAllowed && total <= 4) {
+                $("#js-removechildren").enabled;
+                txtchildren++;
+                total++;
+                currentTextBoxes++;
+                console.log(currentTextBoxes);
+
+            }
+            else
+                $("#js-addchildren").disabled;
+            $("#children").val(txtchildren);
+        });
+
+        $("#js-removechildren").on("click", "", function () {
+            var txtchildren = parseInt($("#children").val());
+            if (txtchildren > 0 && total <= 4) {
+                $("#js-addchildren").enabled;
+                txtchildren--;
+                total--;
+                currentTextBoxes--;
+                console.log(currentTextBoxes);
+            }
+            else
+                $("#js-removechildren").disabled;
+            $("#children").val(txtchildren);
+        });
 
         $("#ajax-add-participant").click(function(){
-            if(currentTextBoxes<4)
+            if(currentTextBoxes<=4)
             {
-                currentTextBoxes++;
-                $("#ajax-participant-names").attr("class","table")
-                $("#ajax-participant-names > tbody:last-child").append("<tr><td>Participant Name</td><td><input type='text' name='name1'></td><td>Participant Age</td><td><input type='text' name='name1'></td><td><button class='btn btn-danger js-removeparticipant' id='ajax-add-innerparticipant" + currentTextBoxes + "'><b>-</b></button></td></tr>");
+                for (i = 1; i <= currentTextBoxes; i++)
+                {
+                    $("#ajax-participant-names").attr("class", "table")
+                    $("#ajax-participant-names > tbody:last-child").append("<tr><td>Participant Name</td><td><input type='text' id='name" + i + "'></td><td>Participant Age</td><td><input type='text' id='age" + i + "'></td><td><button class='btn btn-danger js-removeparticipant' id='ajax-add-innerparticipant" + i + "'><b>-</b></button></td></tr>");
+                }
+            }
+        });
+
+        $("body").on("click","button.js-removeparticipant",function(){
+            //var id = $(this).attr("id");
+            $(this).parents("tr").remove();
+            currentTextBoxes--;
+            var txtchildren = parseInt($("#children").val());
+            var txtadults = parseInt($("#adults").val());
+            if(txtchildren > 1)
+            {
+                txtchildren--;
+                $("#children").val(txtchildren);
+            }
+            else
+            {
+                txtadults--;
+                $("#adults").val(txtadults);
             }
 
-
         });
-        $("body").on("click","button.js-removeparticipant",function(){
-                //var id = $(this).attr("id");
-                $(this).parents("tr").remove();
-                currentTextBoxes--;
-            });
     });
     </script>
 

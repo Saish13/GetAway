@@ -40,7 +40,7 @@ namespace GetAway.Dtos
 
         public int RoomId { get; set; }
 
-        public int UserID { get; set; }
+        public string UserID { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

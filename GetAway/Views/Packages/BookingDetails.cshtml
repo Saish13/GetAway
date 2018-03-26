@@ -4,6 +4,7 @@
 @using Microsoft.AspNet.Identity.EntityFramework;
 @using GetAway.Models;
 @model GetAway.ViewModels.BookingDetailsViewModel
+
 @{
     ViewBag.Title = "BookingDetails";
     Layout = "~/Views/Shared/_LayoutClient.cshtml";
@@ -24,7 +25,7 @@
             <h1>@Model.User.UserName</h1>
         </div>
         <div class="col-md-4">
-            <h3 class="pull-right">Wallet Balance : @Model.User.WalletAmount</h3>
+            <h3 class="pull-right">Wallet Balance : Rs. @Model.User.WalletAmount</h3>
         </div>
     </div>
 </div>

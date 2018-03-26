@@ -21,9 +21,10 @@ namespace GetAway.Controllers.Api
         }
 
         // GET /api/rooms
+        [HttpGet]
         public IHttpActionResult GetRooms()
         {
-            var roomDto = _context.Room.SqlQuery("Select * from Room;").ToList().Select(Mapper.Map<Room, RoomDto>);
+            var roomDto = _context.Room.ToList().Select(Mapper.Map<Room, RoomDto>);
             return Ok(roomDto);
             //var roomDto = _context.Room.ToList().Select(Mapper.Map<Room, RoomDto>);
             //return Ok(roomDto);
@@ -32,13 +33,43 @@ namespace GetAway.Controllers.Api
         [HttpGet]
         public IHttpActionResult GetAvaiableRooms(int id)
         {
-            byte EmpytRoom = 0;
-            var query = "select RoomType from Rooms where HotelId = '" + id + "' and RoomStatus = '" + EmpytRoom + "' group by RoomType;";
-            var roomDto = _context.Room.SqlQuery(query).ToList().Select(Mapper.Map<Room, RoomDto>);
+            var roomDto = _context.Room.Where(r => (r.HotelID == id) && (r.RoomStatus == 0)).ToList().Select(Mapper.Map<Room, RoomDto>);
             return Ok(roomDto);
         }
 
+        [HttpGet]
+        public IHttpActionResult GetRoomType(int id)
+        {
+            var roomDto = _context.Room.Where(r => (r.HotelID == id) && (r.RoomStatus == 0)).
+                GroupBy(r => r.RoomType, r => r.RoomRate).
+                Select( r => new { RoomType = r.Key , RoomRate = r.ToList() });
+            //r => new { RoomType = r.RoomType, RoomRate = r.RoomRate }
+
+
+            return Ok(roomDto);
+        }
+
+        [HttpGet]
+        public IHttpActionResult GetAvailableRoomId(int id)
+        {
+            var room = _context.Room.FirstOrDefault(r => (r.HotelID == id) && (r.RoomStatus == 0));
+            //Select(r => new { RoomType = r.Key, RoomRate = r.ToList() });
+            //r => new { RoomType = r.RoomType, RoomRate = r.RoomRate }
+            return Ok(room);
+        }
+
+        [Route("api/rooms/GetRoomRate/{roomType}/{id}")]
+        [HttpGet]
+        public IHttpActionResult GetRoomRate(string roomType, int id)
+        {
+            var room = _context.Room.FirstOrDefault(r => (r.HotelID == id) && (r.RoomStatus == 0) && (r.RoomType.Contains(roomType)));
+            //Select(r => new { RoomType = r.Key, RoomRate = r.ToList() });
+            //r => new { RoomType = r.RoomType, RoomRate = r.RoomRate }
+            return Ok(room);
+        }
+
         // GET /api/room/1
+        [HttpGet]
         public IHttpActionResult GetRoom(int id)
         {
             var room = _context.Room.SingleOrDefault(r => r.Id == id);

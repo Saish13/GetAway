@@ -91,3 +91,4 @@ C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\Ge
 C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.AddedBookingTables.resources
 C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.AddedBookingParticipantsTable.resources
 C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.UserIDInPackageBooking.resources
+C:\Users\WS-1\documents\visual studio 2015\Projects\GetAway\GetAway\obj\Debug\GetAway.Migrations.AlteredRoomBookingUserID.resources

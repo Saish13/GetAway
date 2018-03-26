@@ -27,6 +27,7 @@ namespace GetAway.Controllers.Api
             return Ok(hotelDto);
         }
 
+
         public IHttpActionResult GetHotel(int id)
         {
             var hotel = _context.Hotel.SingleOrDefault(h => h.Id == id);
